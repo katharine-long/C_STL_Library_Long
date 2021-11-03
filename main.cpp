@@ -1,9 +1,8 @@
-//Dr_T Unit 2 COSC-1437 Starter 
-/* Task -
 
-Top level solution folder: C_STL_Library_YourLastName
 
-create a single main.cpp that contains code samples and implementations of each of the following topics */
+//Top level solution folder: C_STL_Library_Long
+
+//create a single main.cpp that contains code samples and implementations of each of the following topics */
 
 #include <iostream>
 #include <vector>
@@ -31,6 +30,44 @@ class MyClassVector1
       } 
 };
 
+class MyClassVector2 
+{ 
+  private:  
+      vector<double> vdb; 
+  public: 
+      MyClassVector2 (vector<double> v)  //parameterized constructor
+      { 
+        vdb = v; 
+      } 
+      void print() 
+      { 
+          /// print the value of vector 
+          for (int i = 0; i < vdb.size(); i++) 
+          {
+              cout << vdb[i] << " "; 
+          }    
+      } 
+};
+
+class MyClassVector3 
+{ 
+  private:  
+      vector<string> vst; 
+  public: 
+      MyClassVector3 (vector<string> v)  //parameterized constructor
+      { 
+        vst = v; 
+      } 
+      void print() 
+      { 
+          /// print the value of vector 
+          for (int i = 0; i < vst.size(); i++) 
+          {
+              cout << vst[i] << " "; 
+          }    
+      } 
+};
+
 int main() 
 {
     /****Section_Name***Vectors*/ 
@@ -48,8 +85,14 @@ int main()
     vd.push_back(55.4); 
 
     //add 3 elements to the vi vector
+    vi.push_back(4);
+    vi.push_back(5);
+    vi.push_back(6);
 
    // add 3 elements to the vs vector
+   vs.push_back("7");
+   vs.push_back("8");
+   vs.push_back("9");
 
    // display the 3 elements in the vd vector
    cout << "\nValues in vd: \n"; 
@@ -64,23 +107,76 @@ int main()
    }
 
     //display the 3 elements in the vi vector
+    cout << "\nValues in vi: \n"; 
+   for(int vals : vi)
+   {
+     cout << vals << endl; 
+   }
+   cout << "\nAnother way to print vector: " << endl; 
+   for(int i = 0; i < vi.size(); i++)
+   {
+     cout << vi[i] << endl; 
+   }
 
    // display the 3 elements in the vs vector
+   cout << "\nValues in vs: \n"; 
+   for(string vals : vs)
+   {
+     cout << vals << endl; 
+   }
+   cout << "\nAnother way to print vector: " << endl; 
+   for(int i = 0; i < vs.size(); i++)
+   {
+     cout << vs[i] << endl; 
+   }
 
     /****Section_Name***Vector_as_Class_Member*/ 
     //Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/
 
-   cout << "\nVector_as_Class_Member" << endl; 
+   cout << "\nVector1_as_Class_Member" << endl; 
     vector<int> vec; 
         for (int i = 1; i <= 5; i++) 
             vec.push_back(i); 
         MyClassVector1 obj(vec); 
         obj.print(); 
+        cout << endl;
       
       //Continue with MyClassVector2 and MyClassVector3
 
+      cout << "\nVector2_as_Class_Member" << endl; 
+      vector<double> vdb; 
+        for (int i = 1; i <= 5; i++) 
+            vdb.push_back(i); 
+        MyClassVector2 ob(vdb); 
+        ob.print();
+        cout << endl;
+
+        cout << "\nVector3_as_Class_Member" << endl; 
+        vector<string> vst;  
+            vst.push_back("1"); 
+            vst.push_back("2");
+            vst.push_back("3");
+            vst.push_back("4");
+            vst.push_back("5");
+        MyClassVector3 o(vst); 
+        o.print();
+        cout << endl;
+
     /****Section_Name***STL_Iterators*/ 
     
+    vector<int> vint(3); //vector with 3 integer numbers
+    vint[0] = 10;
+    vint[1] = 20;
+    vint[2] = 30;
+
+    //Display the elements of the vector:
+    cout << "\nDisplay the elements of vint: " << endl;
+    vector<int>::iterator it;
+    for (it = vint.begin(); it != vint.end(); ++it) {
+      cout << *it << " ";
+      //like a pointer, iterator is dereferenced to
+      //access the value of the element pointed by it.
+    }
 
     /****Section_Name*** Stack*/
 
