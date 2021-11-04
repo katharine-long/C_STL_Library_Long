@@ -8,7 +8,17 @@
 #include <vector>
 #include <algorithm> 
 #include <string>
+#include <cassert>
+#include <stack>
+#include <set>
+#include <utility>
+#include <map>
 using namespace std; 
+
+bool less_than_7(int);
+
+typedef map<string, int> MapT;  //map declaration
+typedef MapT::const_iterator MapIterT; //map iterator
 
 //Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/ clarifications added
 class MyClassVector1 
@@ -174,44 +184,132 @@ int main()
     vector<int>::iterator it;
     for (it = vint.begin(); it != vint.end(); ++it) {
       cout << *it << " ";
+      cout << endl;
       //like a pointer, iterator is dereferenced to
       //access the value of the element pointed by it.
     }
 
     /****Section_Name*** Stack*/
 
+    stack<int> st;
 
-    //Write comments that help one better understand what the code is doing.
+    st.push(100); //Push number on the stack
+    assert(st.size() == 1); //Verify 1 element is on the stack
+    assert(st.top() == 100); //Verify element value
+
+    cout << "\nThe current value at the top of the stack: " << st.top() << endl;
+
+    st.top() = 456; //Assign new value
+    assert(st.top() == 456);
+
+    cout << "\nThe new value at the top of the stack: " << st.top() << endl;
+
+    st.pop(); //Remove element
+    assert(st.empty() == true);
+    cout << endl;
+
 
     /****Section_Name**** Set*/
     //Write the code as presented in: 3. std::set
 
-    //Write comments that help one better understand what the code is doing.
+    set<int> iset; //Set of unique integer numbers
+
+    iset.insert(11); //Populate set with some Values
+    iset.insert(-11);
+    iset.insert(55);
+    iset.insert(22);
+    iset.insert(22);
+
+    if (iset.find(55) != iset.end()) { //Is the value already stored?
+      iset.insert(55);
+    }
+
+    assert(iset.size() == 4); 
+    set<int>::iterator i;
+
+    for(i = iset.begin(); i != iset.end(); i++) {
+      cout << *i << " ";
+    }
+    cout << endl;
 
     /****Section_Name****Pair_Structure*/
     //Write the code as presented in: 4. std::pair structure
 
-    //Write comments that help one better understand what the code is doing.
+      pair<string, string> strstr; //declare a pair of two strings
+      strstr.first = "Hello"; //populate the pair
+      strstr.second = "World";
+
+      cout << "\nHere is the first pair: " << strstr.first << " " << strstr.second << endl;
+
+      pair <int, string> intstr; //declare a pair with one int and one string
+      intstr.first = 1; //populate the pair
+      intstr.second = "one";
+
+      cout << "\nHere is the second pair: " << intstr.first << " " << intstr.second << endl;
+
+      pair <string, int> strint("two", 2); //declare a pair with one string and one int
+      assert(strint.first == "two"); 
+      assert(strint.second == 2);
+
+      cout << "\nHere is the third pair: " << strint.first << " " << strint.second << endl;
+      cout << endl;
+
 
     /****Section_Name**** Map_Insert*/
     //Write the code as presented in: 14. std::map::insert
 
-    //Write comments that help one better understand what the code is doing.
+      MapT amap; //map declaration in main
+      pair<MapIterT, bool> result = amap.insert(make_pair("Fred", 45)); //fill map
+      assert(result.second == true); //make sure result is set to true
+      assert(result.first->second == 45);
+
+
+      result = amap.insert(make_pair("Fred", 54)); //change the value
+      //Fred was already in the map, result.first simply points there now
+
+      assert(result.second == false); //change result to false
+      assert(result.first->second == 45);
 
     /****Section_Name****Map_Summary*/
     //Write the code as presented in: 16. Map summary
 
-    //Write comments that help one better understand what the code is doing.
+      map<string, string> phone_book; //declare map
+      phone_book["411"] = "Directory"; //fill map
+      phone_book["911"] = "Emergency";
+      phone_book["508-678-2811"] = "BCC";
+
+      if (phone_book.find("411") != phone_book.end()) { //check if already in map
+        phone_book.insert(make_pair(string("411"), string("Directory")));
+      }
+
+      assert(phone_book.size() == 3);
+
+      map<string, string>::const_iterator itr; //make an iterator for the map
+
+      for (itr = phone_book.begin(); itr != phone_book.end(); ++itr) { //print the map
+        cout << itr->first << " " << itr->second << endl;
+      }
+      cout << endl;
 
     /****Section_Name**** Sort_Algorithm*/
     //Write the code as presented in: 23. sort example
 
-    //Write comments that help one better understand what the code is doing.
+    int arr[100]; //declare array
+    sort(arr, arr + 100); //sort array
 
+    vector<int> v1; //declare vector
+    sort(v1.begin(), v1.end()); //sort vector
+    
     /****Section_Name****Predicate_Algorithm*/
     //Write the code as presented in: 25. count_if and predicate function
 
-    //Write comments that help one better understand what the code is doing. 
+      vector<int> v10;
+      int count_less = std::count_if(v10.begin(), v1.end(), less_than_7);
 
       return 0; 
  }
+
+ bool less_than_7(int value) 
+      {
+        return value < 7;
+      }
